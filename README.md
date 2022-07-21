@@ -1,2 +1,1 @@
-# DevOpsProject
-DevOps Project
+Automating AWS with Terraform
