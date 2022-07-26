@@ -10,7 +10,7 @@ resource "aws_subnet" "public0" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.0.0/24"
 
-   tags = {
+  tags = {
     Name = "public0"
   }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "public1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.1.0/24"
 
- tags = {
+  tags = {
     Name = "public1"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_subnet" "private0" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.2.0/24"
 
- tags = {
+  tags = {
     Name = "private0"
   }
 }
@@ -38,7 +38,7 @@ resource "aws_subnet" "private1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.3.0/24"
 
- tags = {
+  tags = {
     Name = "private1"
   }
 }
@@ -46,23 +46,23 @@ resource "aws_subnet" "private1" {
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-   tags = {
+  tags = {
     Name = "main"
   }
 }
 
 resource "aws_eip" "nat0" {
-  vpc      = true
+  vpc = true
 
-   tags = {
+  tags = {
     Name = "nat0"
   }
 }
 
 resource "aws_eip" "nat1" {
-  vpc      = true
+  vpc = true
 
-    tags = {
+  tags = {
     Name = "nat1"
   }
 }
@@ -71,7 +71,7 @@ resource "aws_nat_gateway" "main0" {
   allocation_id = aws_eip.nat0.id
   subnet_id     = aws_subnet.public0.id
 
-    tags = {
+  tags = {
     Name = "main0"
   }
 }
@@ -80,7 +80,7 @@ resource "aws_nat_gateway" "main1" {
   allocation_id = aws_eip.nat1.id
   subnet_id     = aws_subnet.public1.id
 
-    tags = {
+  tags = {
     Name = "main1"
   }
 }
@@ -93,7 +93,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.main.id
   }
 
-    tags = {
+  tags = {
     Name = "public"
   }
 }
@@ -102,11 +102,11 @@ resource "aws_route_table" "private0" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.main0.id
   }
 
-     tags = {
+  tags = {
     Name = "private0"
   }
 }
@@ -115,7 +115,7 @@ resource "aws_route_table" "private1" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.main1.id
   }
 
