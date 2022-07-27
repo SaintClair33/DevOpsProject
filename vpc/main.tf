@@ -13,7 +13,6 @@ resource "aws_subnet" "public0" {
   tags = {
     Name = "public0"
   }
-
 }
 
 resource "aws_subnet" "public1" {
